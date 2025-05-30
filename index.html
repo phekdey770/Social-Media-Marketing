@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Marketing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&family=Moul&family=Moulpali&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3663/3663899.png">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --header-font: 'Moul', sans-serif;
+            --model-font: 'Moulpali', sans-serif;
+            --body-font: 'Kantumruy Pro', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--dark-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .language-toggle input[type="checkbox"] {
+            display: none;
+        }
+
+        .language-toggle label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .language-toggle .toggle-slider {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background-color: #ccc;
+            border-radius: 30px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .language-toggle .toggle-slider:before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: white;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .language-toggle input:checked + .toggle-slider {
+            background-color: var(--primary-color);
+        }
+
+        .language-toggle input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-family: var(--header-font);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80') no-repeat center center/cover;
+            color: white;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-family: var(--header-font);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-button {
+            display: block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: fit-content;
+            margin: auto;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background-color: var(--light-color);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-family: var(--header-font);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--accent-color);
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+        }
+
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-family: var(--model-font);
+        }
+
+        .service-card p {
+            color: #666;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            gap: 50px;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-family: var(--header-font);
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .about-features {
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 100px 0;
+            background-color: var(--light-color);
+        }
+
+        .portfolio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 250px;
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(67, 97, 238, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-item:hover .portfolio-image {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-family: var(--model-font);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .testimonial-slider {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-slide {
+            background: var(--light-color);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 0 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 3px solid var(--accent-color);
+        }
+
+        .testimonial-quote {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .testimonial-role {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-family: var(--header-font);
+        }
+
+        .contact-info p {
+            margin-bottom: 30px;
+        }
+
+        .contact-details {
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: var(--accent-color);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-family: var(--model-font);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: var(--body-font);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .footer-logo-text {
+            font-family: var(--header-font);
+            font-size: 1.5rem;
+        }
+
+        .footer-social {
+            margin-bottom: 30px;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 10px;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-credit {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-container {
+                flex-direction: column;
+            }
+            
+            .about-image, .about-content {
+                flex: none;
+                width: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: left 0.3s ease;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            
+            .services-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 20px;
+            }
+        }
+
+        /* Khmer Language Styles */
+        body.khmer {
+            font-family: var(--body-font);
+        }
+        
+        body.khmer .section-title h2,
+        body.khmer .hero h1,
+        body.khmer .about-content h2,
+        body.khmer .contact-info h2,
+        body.khmer .contact-form h3,
+        body.khmer .portfolio-overlay h3,
+        body.khmer .service-card h3 {
+            font-family: var(--header-font);
+        }
+        
+        body.khmer .logo-text,
+        body.khmer .footer-logo-text {
+            font-family: var(--header-font);
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <label for="language-toggle">English</label>
+        <input type="checkbox" id="language-toggle">
+        <label class="toggle-slider" for="language-toggle"></label>
+        <label for="language-toggle">ភាសាខ្មែរ</label>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/3663/3663899.png" alt="Social Media Marketing Logo">
+                <span class="logo-text">SMM Pro</span>
+            </a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="en">Boost Your Brand With Social Media Marketing</h1>
+            <h1 class="kh" style="display: none;">បង្កើនយ៉ាងរហ័សនូវយុថ្ការបស់អ្នកដោយការលក់ផលិតផលតាមបណ្តាញសង្គម</h1>
+            <p class="en">We help businesses grow their online presence and reach more customers through strategic social media campaigns.</p>
+            <p class="kh" style="display: none;">យើងជួយអាជីវកម្មអោយមានវត្តមានលើបណ្តាញសង្គម និងឈានទៅដល់អតិថិជនបន្ថែមទៀតតាមរយៈយុទ្ធនាការប្រកួតប្រជែង។</p>
+            <a href="#contact" class="cta-button en">Get Started</a>
+            <a href="#contact" class="cta-button kh" style="display: none;">ចាប់ផ្តើម</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-title">
+            <h2 class="en">Our Services</h2>
+            <h2 class="kh" style="display: none;">សេវាកម្មរបស់យើង</h2>
+            <p class="en">We offer comprehensive social media marketing solutions tailored to your business needs</p>
+            <p class="kh" style="display: none;">យើងផ្តល់នូវដំណោះស្រាយពេញលេញសម្រាប់ការលក់ផលិតផលតាមបណ្តាញសង្គមដែលត្រូវនឹងតម្រូវការអាជីវកម្មរបស់អ្នក</p>
+        </div>
+        <div class="services-container">
+            <div class="service-card animate">
+                <div class="service-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <h3 class="en">Social Media Management</h3>
+                <h3 class="kh" style="display: none;">ការគ្រប់គ្រងបណ្តាញសង្គម</h3>
+                <p class="en">We handle all aspects of your social media presence, from content creation to community engagement.</p>
+                <p class="kh" style="display: none;">យើងគ្រប់គ្រងគ្រប់ផ្នែកនៃវត្តមានបណ្តាញសង្គមរបស់អ្នក ពីការបង្កើតមាតិកាដល់ការចូលរួមសហគមន៍។</p>
+            </div>
+            <div class="service-card animate">
+                <div class="service-icon">
+                    <i class="fas fa-ad"></i>
+                </div>
+                <h3 class="en">Paid Advertising</h3>
+                <h3 class="kh" style="display: none;">ការផ្សព្វផ្សាយបង់ប្រាក់</h3>
+                <p class="en">Maximize your ROI with targeted social media ads that reach your ideal customers.</p>
+                <p class="kh" style="display: none;">បង្កើនអត្រានៃការត្រឡប់មកវិញនូវការវិនិយោគរបស់អ្នកជាមួយនឹងការផ្សព្វផ្សាយបណ្តាញសង្គមដែលឈានដល់អតិថិជនល្អបំផុតរបស់អ្នក។</p>
+            </div>
+            <div class="service-card animate">
+                <div class="service-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="en">Analytics & Reporting</h3>
+                <h3 class="kh" style="display: none;">ការវិភាគ និងរបាយការណ៍</h3>
+                <p class="en">Get detailed insights into your campaign performance to make data-driven decisions.</p>
+                <p class="kh" style="display: none;">ទទួលបានការយល់ដឹងលម្អិតអំពីប្រសិទ្ធភាពយុទ្ធនាការរបស់អ្នកដើម្បីធ្វើការសំរេចចិត្តដោយផ្អែកលើទិន្នន័យ។</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-image animate">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="About Our Social Media Marketing Agency">
+            </div>
+            <div class="about-content animate">
+                <h2 class="en">About Our Agency</h2>
+                <h2 class="kh" style="display: none;">អំពីភ្នាក់ងាររបស់យើង</h2>
+                <p class="en">We are a team of passionate digital marketers dedicated to helping businesses thrive in the social media landscape. With over 5 years of experience, we've helped hundreds of clients achieve their marketing goals.</p>
+                <p class="kh" style="display: none;">យើងគឺជាក្រុមអ្នកទីផ្សារឌីជីថលដែលមានចំណាប់អារម្មណ៍ខ្លាំង បំពេញការងារដើម្បីជួយអាជីវកម្មអោយរីកចម្រើននៅក្នុងវិស័យបណ្តាញសង្គម។ ជាមួយនឹងបទពិសោធន៍ជាង ៥ឆ្នាំ យើងបានជួយអតិថិជនរាប់រយនាក់អោយសំរេចបាននូវគោលដៅទីផ្សាររបស់ពួកគេ។</p>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div>
+                            <h4 class="en">Proven Strategies</h4>
+                            <h4 class="kh" style="display: none;">យុទ្ធសាស្ត្រដែលបានបញ្ជាក់</h4>
+                            <p class="en">Our methods are tested and optimized for maximum results.</p>
+                            <p class="kh" style="display: none;">វិធីសាស្ត្ររបស់យើងត្រូវបានសាកល្បង និងបង្កើនប្រសិទ្ធភាពសម្រាប់លទ្ធផលខ្ពស់បំផុត។</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <h4 class="en">Dedicated Team</h4>
+                            <h4 class="kh" style="display: none;">ក្រុមការងារបំពេញការ</h4>
+                            <p class="en">Your account is managed by experts who understand your industry.</p>
+                            <p class="kh" style="display: none;">គណនីរបស់អ្នកត្រូវបានគ្រប់គ្រងដោយអ្នកជំនាញដែលយល់ដឹងអំពីឧស្សាហកម្មរបស់អ្នក។</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div>
+                            <h4 class="en">Creative Solutions</h4>
+                            <h4 class="kh" style="display: none;">ដំណោះស្រាយច្នៃប្រឌិត</h4>
+                            <p class="en">We think outside the box to make your brand stand out.</p>
+                            <p class="kh" style="display: none;">យើងគិតក្រៅប្រអប់ដើម្បីធ្វើអោយម៉ាករបស់អ្នកក្លាយជាអ្នកដឹកនាំ។</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="section-title">
+            <h2 class="en">Our Portfolio</h2>
+            <h2 class="kh" style="display: none;">អតីតការងាររបស់យើង</h2>
+            <p class="en">Check out some of our successful social media campaigns</p>
+            <p class="kh" style="display: none;">មើលខ្លះនៃយុទ្ធនាការបណ្តាញសង្គមដែលជោគជ័យរបស់យើង</p>
+        </div>
+        <div class="portfolio-container">
+            <div class="portfolio-grid">
+                <div class="portfolio-item animate">
+                    <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Fashion Brand Campaign" class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <h3 class="en">Fashion Brand Growth</h3>
+                        <h3 class="kh" style="display: none;">ការរីកចម្រើនម៉ាកសំលៀកបំពាក់</h3>
+                        <p class="en">Increased Instagram followers by 300% in 6 months</p>
+                        <p class="kh" style="display: none;">បង្កើនអ្នកតាមដាន Instagram ដោយ 300% ក្នុងរយៈពេល 6 ខែ</p>
+                    </div>
+                </div>
+                <div class="portfolio-item animate">
+                    <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Restaurant Social Media" class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <h3 class="en">Restaurant Social Media</h3>
+                        <h3 class="kh" style="display: none;">បណ្តាញសង្គមភោជនីយដ្ឋាន</h3>
+                        <p class="en">Boosted customer engagement by 450% across platforms</p>
+                        <p class="kh" style="display: none;">បង្កើនការចូលរួមរបស់អតិថិជនដោយ 450% នៅទូទាំងវេទិកា</p>
+                    </div>
+                </div>
+                <div class="portfolio-item animate">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Tech Startup Campaign" class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <h3 class="en">Tech Startup Launch</h3>
+                        <h3 class="kh" style="display: none;">ការចាប់ផ្តើមសហគ្រិនបច្ចេកវិទ្យា</h3>
+                        <p class="en">Generated 10,000+ leads through targeted Facebook ads</p>
+                        <p class="kh" style="display: none;">បានបង្កើតសារធាតុដឹកនាំ 10,000+ តាមរយៈការផ្សព្វផ្សាយ Facebook គោលដៅ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-title">
+            <h2 class="en">Client Testimonials</h2>
+            <h2 class="kh" style="display: none;">ការអះអាងរបស់អតិថិជន</h2>
+            <p class="en">What our clients say about our social media marketing services</p>
+            <p class="kh" style="display: none;">អ្វីដែលអតិថិជនរបស់យើងនិយាយអំពីសេវាកម្មទីផ្សារបណ្តាញសង្គមរបស់យើង</p>
+        </div>
+        <div class="testimonials-container">
+            <div class="testimonial-slider">
+                <div class="testimonial-slide animate">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Client" class="testimonial-avatar">
+                    <p class="testimonial-quote en">"Working with this team transformed our social media presence. We've seen a 200% increase in engagement and a significant boost in sales."</p>
+                    <p class="testimonial-quote kh" style="display: none;">"ការធ្វើការជាមួយក្រុមនេះបានផ្លាស់ប្តូរវត្តមានបណ្តាញសង្គមរបស់យើង។ យើងបានឃើញការកើនឡើង 200% នៃការចូលរួម និងការកើនឡើងយ៉ាងសំខាន់នៃការលក់។"</p>
+                    <p class="testimonial-author">Sophia Chen</p>
+                    <p class="testimonial-role en">Marketing Director, Fashion Boutique</p>
+                    <p class="testimonial-role kh" style="display: none;">អគ្គនាយកទីផ្សារ, ហាងសំលៀកបំពាក់</p>
+                </div>
+                <div class="testimonial-slide animate">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Client" class="testimonial-avatar">
+                    <p class="testimonial-quote en">"Their strategic approach to Facebook advertising helped us reach our target audience effectively. ROI has been outstanding."</p>
+                    <p class="testimonial-quote kh" style="display: none;">"វិធីសាស្ត្រយុទ្ធសាស្ត្ររបស់ពួកគេចំពោះការផ្សព្វផ្សាយ Facebook បានជួយយើងឈានដល់ទស្សនិកជនគោលដៅយ៉ាងមានប្រសិទ្ធភាព។ អត្រានៃការត្រឡប់មកវិញនៃការវិនិយោគគឺល្អឥតខ្ចោះ។"</p>
+                    <p class="testimonial-author">David Johnson</p>
+                    <p class="testimonial-role en">CEO, Tech Startup</p>
+                    <p class="testimonial-role kh" style="display: none;">អគ្គនាយក, ការចាប់ផ្តើមបច្ចេកវិទ្យា</p>
+                </div>
+                <div class="testimonial-slide animate">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" class="testimonial-avatar">
+                    <p class="testimonial-quote en">"The content they create is always on-brand and engaging. Our Instagram following has grown exponentially since we started working with them."</p>
+                    <p class="testimonial-quote kh" style="display: none;">"មាតិកាដែលពួកគេបង្កើតតែងតែស្របនឹងម៉ាក និងគួរអោយចាប់អារម្មណ៍។ អ្នកតាមដាន Instagram របស់យើងបានកើនឡើងយ៉ាងខ្លាំងតាំងពីយើងចាប់ផ្តើមធ្វើការជាមួយពួកគេ។"</p>
+                    <p class="testimonial-author">Maria Garcia</p>
+                    <p class="testimonial-role en">Brand Manager, Beauty Products</p>
+                    <p class="testimonial-role kh" style="display: none;">អ្នកគ្រប់គ្រងម៉ាក, ផលិតផលសំអាង</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-info animate">
+                <h2 class="en">Get In Touch</h2>
+                <h2 class="kh" style="display: none;">ទាក់ទងជាមួយយើង</h2>
+                <p class="en">Ready to take your social media presence to the next level? Contact us today for a free consultation.</p>
+                <p class="kh" style="display: none;">ត្រៀមខ្លួនដើម្បីយកវត្តមានបណ្តាញសង្គមរបស់អ្នកទៅកម្រិតបន្ទាប់? ទាក់ទងមកយើងឥឡូវនេះសម្រាប់ការពិគ្រោះយោបល់ដោយឥតគិតថ្លៃ។</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="en">Address</h4>
+                            <h4 class="kh" style="display: none;">អាសយដ្ឋាន</h4>
+                            <p>123 Marketing St, Phnom Penh, Cambodia</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="en">Phone</h4>
+                            <h4 class="kh" style="display: none;">ទូរស័ព្ទ</h4>
+                            <p>+855 12 345 678</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 class="en">Email</h4>
+                            <h4 class="kh" style="display: none;">អ៊ីមែល</h4>
+                            <p>info@smmpro.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form animate">
+                <h3 class="en">Send Us a Message</h3>
+                <h3 class="kh" style="display: none;">ផ្ញើសារមកយើង</h3>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control en" placeholder="Your Name" required>
+                        <input type="text" class="form-control kh" style="display: none;" placeholder="ឈ្មោះរបស់អ្នក" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control en" placeholder="Your Email" required>
+                        <input type="email" class="form-control kh" style="display: none;" placeholder="អ៊ីមែលរបស់អ្នក" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control en" placeholder="Subject">
+                        <input type="text" class="form-control kh" style="display: none;" placeholder="ប្រធានបទ">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control en" placeholder="Your Message" required></textarea>
+                        <textarea class="form-control kh" style="display: none;" placeholder="សាររបស់អ្នក" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button en">Send Message</button>
+                    <button type="submit" class="cta-button kh" style="display: none;">ផ្ញើសារ</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/3663/3663899.png" alt="Social Media Marketing Logo">
+                <span class="footer-logo-text">SMM Pro</span>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+            </div>
+            <div class="footer-links">
+                <a href="#home" class="en">Home</a>
+                <a href="#home" class="kh" style="display: none;">ទំព័រដើម</a>
+                <a href="#services" class="en">Services</a>
+                <a href="#services" class="kh" style="display: none;">សេវាកម្ម</a>
+                <a href="#about" class="en">About</a>
+                <a href="#about" class="kh" style="display: none;">អំពី</a>
+                <a href="#portfolio" class="en">Portfolio</a>
+                <a href="#portfolio" class="kh" style="display: none;">អតីតការងារ</a>
+                <a href="#testimonials" class="en">Testimonials</a>
+                <a href="#testimonials" class="kh" style="display: none;">ការអះអាង</a>
+                <a href="#contact" class="en">Contact</a>
+                <a href="#contact" class="kh" style="display: none;">ទាក់ទង</a>
+            </div>
+            <div class="footer-credit">
+                <p class="en">2025 - All rights reserved. Provide by Mr. Phekdey PHORN</p>
+                <p class="kh" style="display: none;">2025 - រក្សារ​សិទ្ធិ​គ្រប់​យ៉ាង ដោយលោក ផន ភក្ដី។</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('nav ul');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('active');
+            } else {
+                backToTopBtn.classList.remove('active');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Scroll Animation
+        const animateElements = document.querySelectorAll('.animate');
+
+        function checkScroll() {
+            animateElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        // Language Toggle
+        const languageToggle = document.getElementById('language-toggle');
+        const khmerElements = document.querySelectorAll('.kh');
+        const englishElements = document.querySelectorAll('.en');
+
+        languageToggle.addEventListener('change', function() {
+            if (this.checked) {
+                // Switch to Khmer
+                document.body.classList.add('khmer');
+                khmerElements.forEach(el => el.style.display = 'block');
+                englishElements.forEach(el => el.style.display = 'none');
+            } else {
+                // Switch to English
+                document.body.classList.remove('khmer');
+                khmerElements.forEach(el => el.style.display = 'none');
+                englishElements.forEach(el => el.style.display = 'block');
+            }
+        });
+
+        // Initialize language to English
+        document.body.classList.remove('khmer');
+        khmerElements.forEach(el => el.style.display = 'none');
+        englishElements.forEach(el => el.style.display = 'block');
+    </script>
+</body>
+</html>
